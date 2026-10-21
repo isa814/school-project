@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand tokens (mirrors tailwind.config.ts) */
+  --navy: #0235a4;
+  --navy-deep: #021e66;
+  --sky: #7eaceb;
+  --sky-soft: #eaf2fd;
+  --ink: #0f172a;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+}
+
+html { scroll-behavior: smooth; }
+body { color: var(--ink); background: var(--surface-muted); -webkit-font-smoothing: antialiased; }
+
+/* Subtle Islamic-inspired geometric lattice, used on navy surfaces */
+.lattice-navy {
+  background-color: var(--navy-deep);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%237EACEB' stroke-opacity='0.14' stroke-width='1'><path d='M40 0 L80 40 L40 80 L0 40 Z'/><circle cx='40' cy='40' r='18'/><path d='M40 22 L58 40 L40 58 L22 40 Z'/></g></svg>");
+  background-size: 80px 80px;
+}
+
+.focus-ring:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+
+/* Button sheen: a light band sweeps across on hover. */
+.btn-anim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+.btn-anim:hover::after { transform: translateX(120%); }
+@media (prefers-reduced-motion: reduce) {
+  .btn-anim, .btn-anim::after { transition: none; }
+  .btn-anim:hover { transform: none; }
+}
